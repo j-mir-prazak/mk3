@@ -5,7 +5,7 @@ var StringDecoder = require('string_decoder').StringDecoder
 var events = require('events')
 var fs = require('fs')
 var schedule = require('node-schedule')
-var omx = require('node-omxplayer')
+var omx = require('node-mplayer')
 
 
 //parameters handling
@@ -59,13 +59,17 @@ function startCycle() {
 
 	var cycle = new Array();
 
-	var filename = "slides.mp4"
+	var filename = "mk.mkv"
 	if ( media ) cycle["player"] = omx(media + 'video/' + filename, 'alsa')
-	else cycle["player"] = omx('assets/' + filename, 'alsa')
+	else cycle["player"] = omx('assets/' + filename, 30)
 	// cycle["player"] = omx('assets/' + filename, 'alsa')
 	pids.push(cycle["player"].pid)
-	console.log("PID"+cycle["player"].pid + ' pid added')
-	console.log("PID"+cycle["player"].pid + ' playback started')
+	cycle["player"].on("playback", function(){
+		cycle["player"].pause()
+		console.log("PID"+cycle["player"].pid + ' pid added')
+		console.log("PID"+cycle["player"].pid + ' playback started')
+	})
+
 	return cycle
 
 }
