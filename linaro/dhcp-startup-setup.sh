@@ -24,7 +24,7 @@ if [ -f "/boot/dhcp-server" ]; then
         echo "removing eth0 profile" | tee -a "$log"/dhcp.status
         sudo rm /etc/dhcpcd.conf
         echo "cp eth0 profile" | tee -a "$log"/dhcp.status
-        sudo cp "$path"/dhcpcddefault /etc/dhcpcd.conf
+        sudo cp "$path"/dhcpcdsetup /etc/dhcpcd.conf
 	      #sudo /etc/init.d/networking restart
         #sudo /etc/init.d/network-manager restart
 	      #sudo ip addr flush eth0
