@@ -1,6 +1,6 @@
 #!/bin/bash
 
-path=$(pwd)
+path=$(dirname "$0")
 
 if [[ ! -z $1 ]]; then echo $1; fi
 
