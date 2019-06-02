@@ -66,11 +66,11 @@ elif [ -f "/boot/dhcp-client" ]; then
   #sudo /etc/init.d/network-manager restart
 
 
-  #echo "eth0 down" | tee -a "$log"/dhcp.status
-  #sudo ifconfig eth0 down | tee -a "$log"/dhcp.status
-  #sleep 5
-  #echo "eth0 up" | tee -a "$log"/dhcp.status
-  #sudo ifconfig eth0 up | tee -a "$log"/dhcp.status
+  echo "eth0 down" | tee -a "$log"/dhcp.status
+  sudo ifconfig eth0 down | tee -a "$log"/dhcp.status
+  sleep 5
+  echo "eth0 up" | tee -a "$log"/dhcp.status
+  sudo ifconfig eth0 up | tee -a "$log"/dhcp.status
       	#sudo ip addr flush eth0
       	#sudo /etc/init.d/networking restart
         #sudo systemctl restart networking
