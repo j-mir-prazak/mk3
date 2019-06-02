@@ -38,19 +38,20 @@ if [ -f "/boot/dhcp-server" ]; then
 
 elif [ -f "/boot/dhcp-client" ]; then
 
+  echo "running dhcp client" | tee -a "$path"dhcp.status
+
   if [[ -f "/var/run/dhcpd.pid" ]]; then
     pid=$(cat /var/run/dhcpd.pid)
     sudo kill -s SIGTERM "$pid"
     sudo rm /var/run/dhcpd.pid
   fi
 
-  sudo ip addr flush eth0
-	echo "running dhcp client" | tee -a "$path"dhcp.status
 	echo "removing eth0 profile" | tee -a "$path"dhcp.status
   sudo bash -c 'rm /etc/network/interfaces.d/eth0'
   cat "$path"eth0blank | tee -a "$path"dhcp.status
   echo "cp eth0 profile" | tee -a "$path"dhcp.status
   sudo cp "$path"eth0blank /etc/network/interfaces.d/eth0
+  sudo ip addr flush eth0
   sudo /etc/init.d/networking restart
   sudo /etc/init.d/network-manager restart
       	#sudo ip addr flush eth0
