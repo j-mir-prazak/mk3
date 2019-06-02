@@ -1,6 +1,6 @@
 #!/bin/bash
 
-path="/home/linaro/"
+path=$(pwd)
 
 if [[ ! -z $1 ]]; then echo $1; fi
 
