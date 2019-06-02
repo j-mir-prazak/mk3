@@ -1,5 +1,4 @@
 #!/bin/bash
 
-sudo chmod 0777 -R /home/linaro/*
+sudo chmod 0777 -R /home/*
 sudo chmod +x -R /etc/network/*
-
