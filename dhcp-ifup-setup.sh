@@ -19,6 +19,12 @@ if [ -f "/boot/dhcp-server" ]; then
   echo "" >> "$path"dhcp.status
   #journalctl -xe >> "$path"dhcp.status
 
+elif [ -f "/boot/dhcp-client" ]; then
+
+  echo "" >> "$path"dhcp.status
+  echo "--------------------------------------------  -----" >> "$path"dhcp.status
+  echo "" >> "$path"dhcp.status
+
 else
         echo "no dhcp setup specified"
 fi

@@ -20,9 +20,11 @@ if [ -f "/boot/dhcp-server" ]; then
           sudo kill -s SIGTERM "$pid"
           sudo rm /var/run/dhcpd.pid
         fi
-
-        sudo rm /etc/network/interfaces.d/eth0
-        sudo cp -f "$path"eth0.setup /etc/network/interfaces.d/eth0
+        echo "removing eth0 profile" | tee -a "$path"dhcp.status
+        sudo bash -c 'rm /etc/network/interfaces.d/eth0'
+        cat "$path"eth0setup | tee -a "$path"dhcp.status
+        echo "cp eth0 profile" | tee -a "$path"dhcp.status
+        sudo cp "$path"eth0setup >/etc/network/interfaces.d/eth0
 	      sudo /etc/init.d/networking restart
         sudo /etc/init.d/network-manager restart
 	      sudo ip addr flush eth0
@@ -42,12 +44,15 @@ elif [ -f "/boot/dhcp-client" ]; then
     sudo rm /var/run/dhcpd.pid
   fi
 
+  sudo ip addr flush eth0
 	echo "running dhcp client" | tee -a "$path"dhcp.status
-  sudo rm /etc/network/interfaces.d/eth0
-  sudo cp -f "$path"eth0.blank /etc/network/interfaces.d/eth0
+	echo "removing eth0 profile" | tee -a "$path"dhcp.status
+  sudo bash -c 'rm /etc/network/interfaces.d/eth0'
+  cat "$path"eth0blank | tee -a "$path"dhcp.status
+  echo "cp eth0 profile" | tee -a "$path"dhcp.status
+  sudo cp "$path"eth0blank /etc/network/interfaces.d/eth0
   sudo /etc/init.d/networking restart
   sudo /etc/init.d/network-manager restart
-	sudo ip addr flush eth0
       	#sudo ip addr flush eth0
       	#sudo /etc/init.d/networking restart
         #sudo systemctl restart networking

@@ -1,0 +1,4 @@
+### blank interface ###
+auto eth0
+allow-hotplug eth0
+
