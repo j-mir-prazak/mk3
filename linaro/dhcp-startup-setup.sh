@@ -56,9 +56,9 @@ elif [ -f "/boot/dhcp-client" ]; then
   cat "$path"/eth0blank | tee -a "$path"/dhcp.status
   echo "cp eth0 profile" | tee -a "$path"/dhcp.status
   sudo cp "$path"/eth0blank /etc/network/interfaces.d/eth0
-  sudo ip addr flush eth0
-  sudo /etc/init.d/networking restart
-  sudo /etc/init.d/network-manager restart
+  #sudo ip addr flush eth0
+  #sudo /etc/init.d/networking restart
+  #sudo /etc/init.d/network-manager restart
 
 
   sudo ifconfig eth0 down | tee -a "$path"/dhcp.status
