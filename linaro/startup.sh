@@ -70,7 +70,8 @@ elif [ -f "/boot/dhcp-client" ]; then
 				echo "restarting connection"
 				if fping -q -c4 -t1500 192.168.99.1 &>/dev/null; then
 					echo "saved by the master connection"
-					bash /home/pi/mk3/linaro/dhcp-startup-setup.
+				else
+					bash /home/pi/mk3/linaro/dhcp-startup-setup.sh
 				fi
 				nctries=0
 			fi
