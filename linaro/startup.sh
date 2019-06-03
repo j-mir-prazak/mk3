@@ -34,7 +34,7 @@ while true; do
 	fi
 	echo "-------------------------------------------------" >> "$log"/dhcp.status
 
-	if [ $c -eq 60 ]; then
+	if [ $c -eq 10 ]; then
 		echo "60 loops"
 		(sudo ntpd -gq) &
 		c=0
