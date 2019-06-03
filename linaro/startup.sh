@@ -3,6 +3,7 @@
 sudo chmod 0777 -R /home/*
 sudo chmod +x -R /etc/network/*
 
+path=$(dirname $0)
 log="/home/pi"
 
 sudo systemctl stop systemd-timesyncd.service
@@ -11,6 +12,19 @@ sudo systemctl disable systemd-timesyncd.service
 sudo service systemd-timesyncd stop
 sudo service hwclock.sh stop
 date --s "00:08:00"
+
+
+if [ -f "/boot/dhcp-server" ]; then
+	sudo cp "$path"/ntpserver /etc/ntp.conf
+	sudo service ntp restart
+elif [ -f "/boot/dhcp-client" ]; then
+	sudo cp "$path"/ntpclient /etc/ntp.conf
+	sudo service ntp restart
+fi
+
+
+
+
 
 c=0
 
