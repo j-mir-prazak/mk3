@@ -11,7 +11,7 @@ var omx = require('node-mplayer')
 //parameters handling
 var media = process.argv[2];
 
-if ( media != "" ) {
+if ( media ) {
 	console.log('flash drive name: ' + media);
 	// process.emit("SIGINT");
 	// process.exit(0);

@@ -42,7 +42,7 @@ function looping {
 	  if [ "$media" != "" ]
 		then
 			echo "Sourcing flash drive."
-			node index.js "$media" &
+			node index.js &
 		else
 			echo "Sourcing assets."
 			node index.js &
