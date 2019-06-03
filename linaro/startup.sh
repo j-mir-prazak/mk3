@@ -21,7 +21,7 @@ while true; do
 	sleep 1
 
 	  echo "-------------------------------------------------" >> "$log"/dhcp.status
-		  echo "startup loop" >> ""$log"/dhcp.status
+		  echo "startup loop" >> "$log"/dhcp.status
 
 	echo "-------------------------------------------------" >> "$log"/dhcp.status
 
