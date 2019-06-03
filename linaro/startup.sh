@@ -26,7 +26,7 @@ while true; do
 	echo "-------------------------------------------------" >> "$log"/dhcp.status
 
 	if systemctl is-active --quiet isc-dhcp-server.service; then
-		date >> ""$log"/dhcp.status
+		date >> "$log"/dhcp.status
 		echo "dhcp is running" >> "$log"/dhcp.status
 	else
 		echo "restarting dhcp" >> "$log"/dhcp.status
