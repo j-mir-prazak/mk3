@@ -20,23 +20,31 @@ while true; do
 	c=$(($c+1))
 	sleep 1
 
+	if [ -f "/boot/dhcp-server" ]; then
+
 	  echo "-------------------------------------------------" >> "$log"/dhcp.status
 		  echo "startup loop" >> "$log"/dhcp.status
 
-	echo "-------------------------------------------------" >> "$log"/dhcp.status
+			echo "-------------------------------------------------" >> "$log"/dhcp.status
 
-	if systemctl is-active --quiet isc-dhcp-server.service; then
-		date >> "$log"/dhcp.status
-		echo "dhcp is running" >> "$log"/dhcp.status
-	else
-		echo "restarting dhcp" >> "$log"/dhcp.status
-		(sudo systemctl restart isc-dhcp-server  | tee -a "$log"/dhcp.status)
+			if systemctl is-active --quiet isc-dhcp-server.service; then
+				date >> "$log"/dhcp.status
+				echo "dhcp is running" >> "$log"/dhcp.status
+			else
+				echo "restarting dhcp" >> "$log"/dhcp.status
+				(sudo systemctl restart isc-dhcp-server  | tee -a "$log"/dhcp.status)
 	fi
+
 	echo "-------------------------------------------------" >> "$log"/dhcp.status
 
+elif [ -f "/boot/dhcp-client" ]; then
 	if [ $c -eq 60 ]; then
 		echo "60 loops"
-		(sudo ntpd -gq) 
+		echo "-------------------------------------------------" >> "$log"/dhcp.status
+		echo "time sync" >> "$log"/dhcp.status
+		echo "-------------------------------------------------" >> "$log"/dhcp.status
+		(sudo ntpd -gq)
 		c=0
 	fi
+fi
 done
