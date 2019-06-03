@@ -57,7 +57,7 @@ slaac private
 
 
 # MY SETTINGS:
-interface eth0
+interface enxb827ebd2845d
 static ip_address=192.168.88.1/24
 static broadcast_address=192.168.88.255
 static domain_name_servers=8.8.8.8 8.8.4.4

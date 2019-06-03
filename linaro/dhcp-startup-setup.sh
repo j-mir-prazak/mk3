@@ -31,10 +31,10 @@ if [ -f "/boot/dhcp-server" ]; then
 
 
         echo "eth0 down" | tee -a "$log"/dhcp.status
-        sudo ifconfig eth0 down | tee -a "$log"/dhcp.status
+        sudo ifconfig enxb827ebd2845d down | tee -a "$log"/dhcp.status
         sleep 5
         echo "eth0 up" | tee -a "$log"/dhcp.status
-        sudo ifconfig eth0 up | tee -a "$log"/dhcp.status
+        sudo ifconfig enxb827ebd2845d up | tee -a "$log"/dhcp.status
         #sudo systemctl restart networking
 	      #sudo /etc/init.d/networking restart
 
@@ -67,10 +67,10 @@ elif [ -f "/boot/dhcp-client" ]; then
 
 
   echo "eth0 down" | tee -a "$log"/dhcp.status
-  sudo ifconfig eth0 down | tee -a "$log"/dhcp.status
+  sudo ifconfig enxb827ebd2845d down | tee -a "$log"/dhcp.status
   sleep 5
   echo "eth0 up" | tee -a "$log"/dhcp.status
-  sudo ifconfig eth0 up | tee -a "$log"/dhcp.status
+  sudo ifconfig enxb827ebd2845d up | tee -a "$log"/dhcp.status
       	#sudo ip addr flush eth0
       	#sudo /etc/init.d/networking restart
         #sudo systemctl restart networking
