@@ -67,8 +67,9 @@ elif [ -f "/boot/dhcp-client" ]; then
 		then echo "lost connection?";
 		nctries=$(($nctries+1))
 			if [ $nctries -eq 60 ]; then
-				"restarting connection"
+				echo "restarting connection"
 				if fping -q -c4 -t1500 192.168.9.1 &>/dev/null; then
+					echo "saved by the master connection"
 					bash /home/pi/mk3/linaro/dhcp-startup-setup.
 				fi
 				nctries=0
