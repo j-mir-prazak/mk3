@@ -46,7 +46,7 @@ while true; do
 				echo "dhcp is running" >> "$log"/dhcp.status
 			else
 				echo "restarting dhcp" >> "$log"/dhcp.status
-				(sudo systemctl restart isc-dhcp-server  | tee -a "$log"/dhcp.status)
+				sudo systemctl restart isc-dhcp-server  | tee -a "$log"/dhcp.status
 	fi
 
 	echo "-------------------------------------------------" >> "$log"/dhcp.status
