@@ -27,7 +27,7 @@ fi
 
 
 c=0
-
+nctries=0
 
 while true; do
 	echo $c
@@ -59,6 +59,13 @@ elif [ -f "/boot/dhcp-client" ]; then
 		echo "-------------------------------------------------" >> "$log"/dhcp.status
 		sudo ntpd -gq
 		c=0
+
+		if ! ping -q -c1 -i 0.2 192.168.88.1 &>/dev/null;
+			then echo "lost connection?";
+			nctries=$(($nctries+1))
+		fi
+
+
 	fi
 fi
 done
