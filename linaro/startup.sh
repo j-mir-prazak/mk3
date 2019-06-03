@@ -20,19 +20,19 @@ while true; do
 	c=$(($c+1))
 	sleep 1
 
-	  echo "-------------------------------------------------" >> "$log"
-		  echo "startup loop" >> "$log"
+	  echo "-------------------------------------------------" >> ""$log"/dhcp.status
+		  echo "startup loop" >> ""$log"/dhcp.status
 
-	echo "-------------------------------------------------" >> "$log"
+	echo "-------------------------------------------------" >> ""$log"/dhcp.status
 
 	if systemctl is-active --quiet isc-dhcp-server.service; then
-		date >> "$log"/dhcp.status
+		date >> ""$log"/dhcp.status
 		echo "dhcp is running" >> "$log"/dhcp.status
 	else
 		echo "restarting dhcp" >> "$log"/dhcp.status
 		sudo systemctl restart isc-dhcp-server  | tee -a "$log"/dhcp.status
 	fi
-	echo "-------------------------------------------------" >> "$log"
+	echo "-------------------------------------------------" >> ""$log"/dhcp.status
 
 	if [ $c -eq 60 ]; then
 		echo "60 loops"
