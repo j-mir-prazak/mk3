@@ -30,13 +30,13 @@ while true; do
 		echo "dhcp is running" >> "$log"/dhcp.status
 	else
 		echo "restarting dhcp" >> "$log"/dhcp.status
-		sudo systemctl restart isc-dhcp-server  | tee -a "$log"/dhcp.status
+		(sudo systemctl restart isc-dhcp-server  | tee -a "$log"/dhcp.status) &
 	fi
 	echo "-------------------------------------------------" >> "$log"/dhcp.status
 
 	if [ $c -eq 60 ]; then
 		echo "60 loops"
-		sudo ntpd -gq
+		(sudo ntpd -gq) &
 		c=0
 	fi
 done
