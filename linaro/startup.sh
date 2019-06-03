@@ -11,7 +11,7 @@ sudo systemctl disable systemd-timesyncd.service
 
 sudo service systemd-timesyncd stop
 sudo service hwclock.sh stop
-date --s "00:08:00"
+sudo date --s "00:08:00"
 
 
 if [ -f "/boot/dhcp-server" ]; then
