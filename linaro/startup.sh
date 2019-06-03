@@ -66,7 +66,7 @@ elif [ -f "/boot/dhcp-client" ]; then
 	if ! fping -q -c1 -t500 192.168.88.1 &>/dev/null;
 		then echo "lost connection?";
 		nctries=$(($nctries+1))
-			if [ $nctries -eq 60 ]; then
+			if [ $nctries -eq 10 ]; then
 				echo "restarting connection"
 				if fping -q -c4 -t1500 192.168.9.1 &>/dev/null; then
 					echo "saved by the master connection"
