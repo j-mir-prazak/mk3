@@ -2,9 +2,22 @@
 
 sudo chmod 0777 -R /home/*
 sudo chmod +x -R /etc/network/*
+
+log="/home/pi"
+
+sudo systemctl stop systemd-timesyncd.service
+sudo systemctl disable systemd-timesyncd.service
+
+sudo service systemd-timesyncd stop
+sudo service hwclock.sh stop
+date --s "00:08:00"
+
 c=0
+
+
 while true; do
-	c=c+1
+	echo $c
+	c=$(($c+1))
 	sleep 1
 
 	  echo "-------------------------------------------------" >> "$log"
@@ -21,7 +34,9 @@ while true; do
 	fi
 	echo "-------------------------------------------------" >> "$log"
 
-	if [ $c -eq 10]; then
-		echo "10 loops"
+	if [ $c -eq 60 ]; then
+		echo "60 loops"
+		sudo ntpd -gq
+		c=0
 	fi
 done
