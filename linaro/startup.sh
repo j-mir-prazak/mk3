@@ -15,9 +15,11 @@ date --s "00:08:00"
 
 
 if [ -f "/boot/dhcp-server" ]; then
+	echo "cp ntp server settings"
 	sudo cp "$path"/ntpserver /etc/ntp.conf
 	sudo service ntp restart
 elif [ -f "/boot/dhcp-client" ]; then
+	echo "cp ntp client settings"
 	sudo cp "$path"/ntpclient /etc/ntp.conf
 	sudo service ntp restart
 fi
@@ -57,7 +59,7 @@ elif [ -f "/boot/dhcp-client" ]; then
 		echo "-------------------------------------------------" >> "$log"/dhcp.status
 		echo "time sync" >> "$log"/dhcp.status
 		echo "-------------------------------------------------" >> "$log"/dhcp.status
-		(sudo ntpd -gq)
+		sudo ntpd -gq
 		c=0
 	fi
 fi
