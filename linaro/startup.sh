@@ -52,6 +52,7 @@ while true; do
 	echo "-------------------------------------------------" >> "$log"/dhcp.status
 
 elif [ -f "/boot/dhcp-client" ]; then
+
 	if [ $c -eq 60 ]; then
 		echo "60 loops"
 		echo "-------------------------------------------------" >> "$log"/dhcp.status
@@ -60,12 +61,23 @@ elif [ -f "/boot/dhcp-client" ]; then
 		sudo ntpd -gq
 		c=0
 
-		if ! fping -q -c1 -t500 192.168.88.1 &>/dev/null;
-			then echo "lost connection?";
-			nctries=$(($nctries+1))
-		fi
+	fi
+
+	if ! fping -q -c1 -t500 192.168.88.1 &>/dev/null;
+		then echo "lost connection?";
+		nctries=$(($nctries+1))
+			if [ $nctries -eq 60 ]; then
+				"restarting connection"
+				bash /home/pi/mk3/linaro/dhcp-startup-setup.
+				nctries=0
+			fi
 
 
+	fi
+
+	if fping -q -c1 -t500 192.168.88.1 &>/dev/null;
+		then echo "connection";
+		nctries=0
 	fi
 fi
 done
