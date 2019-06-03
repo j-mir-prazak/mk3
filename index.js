@@ -76,7 +76,7 @@ function startCycle() {
 
 	var filename = assets[0]
 	if ( media ) cycle["player"] = omx(media + 'video/' + filename, 'alsa')
-	else cycle["player"] = omx('assets/' + filename, 50)
+	else cycle["player"] = omx('assets/' + filename, 86)
 	// cycle["player"] = omx('assets/' + filename, 'alsa')
 	pids.push(cycle["player"].pid)
 	cycle["player"].on("playback", function(){
