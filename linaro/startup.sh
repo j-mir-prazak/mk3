@@ -74,7 +74,9 @@ elif [ -f "/boot/dhcp-client" ]; then
 		echo "-------------------------------------------------" >> "$log"/dhcp.status
 		echo "time sync" >> "$log"/dhcp.status
 		echo "-------------------------------------------------" >> "$log"/dhcp.status
+		sudo service ntp stop
 		sudo ntpd -gq
+		sudo service ntp start
 		c=0
 
 	fi
