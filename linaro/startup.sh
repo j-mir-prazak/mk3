@@ -49,6 +49,22 @@ while true; do
 				sudo systemctl restart isc-dhcp-server  | tee -a "$log"/dhcp.status
 	fi
 
+	if ! fping -q -c1 -t500 192.168.88.1 &>/dev/null;
+		then echo "lost connection?";
+		nctries=$(($nctries+1))
+			if [ $nctries -eq 10 ]; then
+				echo "restarting connection"
+				if fping -q -c4 -t1500 192.168.99.1 &>/dev/null; then
+					echo "saved by the master connection"
+				elif fping -q -c4 -t1500 8.8.8.8 &>/dev/null; then
+					echo "saved by the internet connection"
+				else
+					bash /home/pi/mk3/linaro/dhcp-startup-setup.sh
+				fi
+				nctries=0
+			fi
+	fi
+
 	echo "-------------------------------------------------" >> "$log"/dhcp.status
 
 elif [ -f "/boot/dhcp-client" ]; then
