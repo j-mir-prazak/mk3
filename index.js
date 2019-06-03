@@ -52,6 +52,13 @@ var date
 var obj
 var sch
 
+var assets = new Array();
+assets = fs.readdirSync('assets')
+if ( assets.length < 1) {
+	console.log("no assets")
+	process.exit(0)
+}
+
 function startCycle() {
 
 	console.log("------------------  n e w  c y c l e  ------------------")
@@ -59,7 +66,7 @@ function startCycle() {
 
 	var cycle = new Array();
 
-	var filename = "mk.mkv"
+	var filename = assets[0]
 	if ( media ) cycle["player"] = omx(media + 'video/' + filename, 'alsa')
 	else cycle["player"] = omx('assets/' + filename, 30)
 	// cycle["player"] = omx('assets/' + filename, 'alsa')
