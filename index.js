@@ -52,6 +52,11 @@ var date
 var obj
 var sch
 
+if ( ! fs.existsSync('assets')) {
+	console.log("no assets folder")
+	process.exit(0)
+}
+
 var assets = new Array();
 assets = fs.readdirSync('assets')
 if ( assets.length < 1) {
