@@ -79,8 +79,8 @@ while true; do
 
 elif [ -f "/boot/dhcp-client" ]; then
 
-	if [ $c -eq 60 ]; then
-		echo "60 loops"
+	if [ $c -eq 360 ]; then
+		echo "360 loops"
 		echo "-------------------------------------------------" >> "$log"/dhcp.status
 		echo "time sync" >> "$log"/dhcp.status
 		echo "-------------------------------------------------" >> "$log"/dhcp.status
