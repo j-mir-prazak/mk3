@@ -91,15 +91,15 @@ elif [ -f "/boot/dhcp-client" ]; then
 
 	fi
 
-	if ! fping -q -c1 -t500 192.168.88.1 &>/dev/null;
-		then echo "lost connection?";
+	if ! fping -q -c1 -t500 192.168.88.1 &>/dev/null;	then
+		echo "lost connection?" >> "$log"/dhcp.status
 		nctries=$(($nctries+1))
 			if [ $nctries -eq 10 ]; then
-				echo "restarting connection"
+				echo "restarting connection">> "$log"/dhcp.status
 				if fping -q -c4 -t1500 192.168.99.1 &>/dev/null; then
-					echo "saved by the master connection"
+					echo "saved by the master connection">> "$log"/dhcp.status
 				elif fping -q -c4 -t1500 8.8.8.8 &>/dev/null; then
-					echo "saved by the internet connection"
+					echo "saved by the internet connection">> "$log"/dhcp.status
 				else
 					bash /home/pi/mk3/linaro/dhcp-startup-setup.sh
 				fi
@@ -107,8 +107,8 @@ elif [ -f "/boot/dhcp-client" ]; then
 			fi
 	fi
 
-	if fping -q -c1 -t500 192.168.88.1 &>/dev/null;
-		then echo "connection";
+	if fping -q -c1 -t500 192.168.88.1 &>/dev/null; then
+		echo "connection" >> "$log"/dhcp.status
 		nctries=0
 	fi
 fi
