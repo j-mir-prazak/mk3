@@ -1,10 +1,15 @@
 #!/bin/bash
 
-sudo chmod 0777 -R /home/*
-sudo chmod +x -R /etc/network/*
 
 path=$(dirname $0)
 log="/home/pi"
+
+
+sudo chmod 0777 -R /home/*
+sudo chmod +x -R /etc/network/*
+
+sudo rm "$log"/dhcp.status
+
 
 sudo systemctl stop systemd-timesyncd.service
 sudo systemctl disable systemd-timesyncd.service
@@ -28,6 +33,7 @@ fi
 
 c=0
 nctries=0
+dhcptries=0;
 
 while true; do
 	echo $c
@@ -41,13 +47,17 @@ while true; do
 
 			echo "-------------------------------------------------" >> "$log"/dhcp.status
 
-			if systemctl is-active --quiet isc-dhcp-server.service; then
+			if sudo systemctl is-active --quiet isc-dhcp-server.service; then
 				date >> "$log"/dhcp.status
 				echo "dhcp is running" >> "$log"/dhcp.status
 			else
-				echo "restarting dhcp" >> "$log"/dhcp.status
-				sudo systemctl restart isc-dhcp-server  | tee -a "$log"/dhcp.status
-	fi
+				dhcptries=$(dhcptries+1)
+				if [ $dhcptries -eq 10 ]; then
+					echo "restarting dhcp" >> "$log"/dhcp.status
+					sudo systemctl restart isc-dhcp-server  | tee -a "$log"/dhcp.status
+					dhcptries=0
+				fi
+			fi
 
 	if ! fping -q -c1 -t500 192.168.88.1 &>/dev/null;
 		then echo "lost connection?";
