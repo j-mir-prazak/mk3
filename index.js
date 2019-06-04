@@ -140,7 +140,7 @@ function openDay(daynum, days=false) {
 		return false
 	}
 
-	obj = JSON.parse(fs.readFileSync('schedule.json', 'utf8'));
+	obj = JSON.parse(fs.readFileSync('test_schedule.json', 'utf8'));
 	sch = obj.schedule
 	date = new Date()
 
