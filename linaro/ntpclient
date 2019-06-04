@@ -56,4 +56,5 @@ restrict source notrap nomodify noquery
 #disable auth
 #broadcastclient
 
+restrict default
 server 192.168.88.1 iburst

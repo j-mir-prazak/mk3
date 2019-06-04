@@ -12,7 +12,7 @@ echo "" >> "$log"/dhcp.status
 echo "dhcp ifup startup" | tee -a "$log"/dhcp.status
 date | tee -a "$log"/dhcp.status
 
-if [ -f "/boot/dhcp-server" ]; then
+if [ -f "/boot/dhcp-server" ]; then   
 
   sudo systemctl restart isc-dhcp-server | tee -a "$log"/dhcp.status
   echo "" >> "$log"/dhcp.status

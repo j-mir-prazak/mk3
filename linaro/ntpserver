@@ -56,9 +56,9 @@ restrict source notrap nomodify noquery
 #disable auth
 #broadcastclient
 
-
+restrict default
 restrict 192.168.88.0 mask 255.255.255.0
 broadcast 192.168.88.1
 broadcast 224.0.1.1
 
-server 127.127.1.0 iburst
+server 127.127.1.0 prefer
