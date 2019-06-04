@@ -64,9 +64,9 @@ while true; do
 		nctries=$(($nctries+1))
 			if [ $nctries -eq 10 ]; then
 				echo "restarting connection"
-				if fping -q -c4 -t1500 192.168.99.1 &>/dev/null; then
+				if sudo fping -q -c4 -t1500 192.168.99.1 &>/dev/null; then
 					echo "saved by the master connection"
-				elif fping -q -c4 -t1500 8.8.8.8 &>/dev/null; then
+				elif sudo fping -q -c4 -t1500 8.8.8.8 &>/dev/null; then
 					echo "saved by the internet connection"
 				else
 					bash /home/pi/mk3/linaro/dhcp-startup-setup.sh
@@ -96,9 +96,9 @@ elif [ -f "/boot/dhcp-client" ]; then
 		nctries=$(($nctries+1))
 			if [ $nctries -eq 10 ]; then
 				echo "restarting connection">> "$log"/dhcp.status
-				if fping -q -c4 -t1500 192.168.99.1 &>/dev/null; then
+				if sudo fping -q -c4 -t1500 192.168.99.1 &>/dev/null; then
 					echo "saved by the master connection">> "$log"/dhcp.status
-				elif fping -q -c4 -t1500 8.8.8.8 &>/dev/null; then
+				elif sudo fping -q -c4 -t1500 8.8.8.8 &>/dev/null; then
 					echo "saved by the internet connection">> "$log"/dhcp.status
 				else
 					bash /home/pi/mk3/linaro/dhcp-startup-setup.sh
