@@ -31,7 +31,7 @@ fi
 
 
 
-c=0
+c=570
 nctries=0
 dhcptries=0;
 
@@ -79,8 +79,8 @@ while true; do
 
 elif [ -f "/boot/dhcp-client" ]; then
 
-	if [ $c -eq 360 ]; then
-		echo "360 loops"
+	if [ $c -eq 600 ]; then
+		echo "600 loops"
 		echo "-------------------------------------------------" >> "$log"/dhcp.status
 		echo "time sync" >> "$log"/dhcp.status
 		echo "-------------------------------------------------" >> "$log"/dhcp.status
